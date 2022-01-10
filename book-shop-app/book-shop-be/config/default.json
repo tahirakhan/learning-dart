@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://innovationhub:innovationhub@cluster0.l8f85.mongodb.net/book-store-db?retryWrites=true&w=majority",
+    "jwtSecret": "axiom-jwt-secret"
+}
