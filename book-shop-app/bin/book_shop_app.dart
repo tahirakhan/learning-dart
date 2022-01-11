@@ -1,5 +1,9 @@
 import 'dart:io';
 
+import 'package:colorize/colorize.dart';
+
+import 'bill.dart';
+import 'book.dart';
 import 'book_shop.dart';
 import 'util/util.dart';
 
@@ -10,6 +14,8 @@ class BookShopApp {
       'Please select: (v)iew items, (s)elect book, (c)heckout, (e)xit: ';
 
   void run() {
+    var bill = Bill();
+
     shop.init();
 
     while (true) {
@@ -17,15 +23,30 @@ class BookShopApp {
 
       switch (input) {
         case 'v':
-          print(shop.books.length);
+          bill.viewBooks?.forEach((element) {
+            print(Colorize('$element \n').lightGreen());
+          });
           break;
         case 's':
           Util.printTitle('Available Books:');
 
-          Util.selectBook('Your choice: ');
+          for (var book in shop.books) {
+            print(
+                '${book.id} ${book.bookTitle} (${book.bookAuthor}) Rs. ${book.price}');
+          }
+
+          String? id = Util.selectBook('Your choice: ');
+          List<Book> result = shop.books.where((e) => e.id == id).toList();
+          bill.addBook(result[0]);
+
           break;
 
         case 'c':
+          print(Colorize('Bill # ${bill.id}, Total bill amount = ' +
+                  bill.totalBill.toString())
+              .black()
+              .bgLightCyan());
+          bill = Bill();
           break;
 
         case 'e':

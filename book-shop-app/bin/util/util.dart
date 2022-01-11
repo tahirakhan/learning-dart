@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:math';
 import 'package:colorize/colorize.dart';
 
-import '../boot.dart';
+import '../book.dart';
 
 class Util {
   static String? getInput(String prompt) {
@@ -33,7 +33,8 @@ class Util {
   static List<Book>? readDataFromCSV() {
     var books = <Book>[];
     try {
-      var fileContent = File('../data/books.csv').readAsLinesSync();
+      print(File('bin/data/books.csv').toString());
+      var fileContent = File('bin/data/books.csv').readAsLinesSync();
       for (var line in fileContent) {
         List<dynamic> lineValues = line.split(',');
         if (lineValues[0] != 'id') {
